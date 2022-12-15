@@ -1,12 +1,14 @@
 #include "button.h"
 
-Button::Button(int SizeX, int SizeY, int PosX, int PosY)
+Button::Button(int SizeX, int SizeY, int PosX, int PosY, std::string filename)
 {
+    buttonTexture = std::make_shared<sf::Texture>();
+    buttonTexture->loadFromFile(filename);
+    setTexture(*buttonTexture);
     buttonRectangle = std::make_shared<sf::RectangleShape>();
-    buttonRectangle->setSize(sf::Vector2f(SizeX, SizeY));
-    buttonRectangle->setOutlineThickness(5);
-    buttonRectangle->setOutlineColor(sf::Color::Red);
+
     buttonRectangle->setPosition(PosX, PosY);
+    setPosition(PosX, PosY);
 }
 
 bool Button::Clicked(){

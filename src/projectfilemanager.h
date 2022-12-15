@@ -10,11 +10,11 @@
 class ProjectFileManager: public WindowActivity
 {
 private:
-    std::shared_ptr<Button> CreateButton = std::make_shared<Button>(200, 70, 300, 100);
-    std::shared_ptr<Button> ChooseFile = std::make_shared<Button>(250, 70, 300, 250);
-    std::shared_ptr<Button> Back = std::make_shared<Button>(70, 70, 300, 400);
-    std::shared_ptr<Button> ChangeFile = std::make_shared<Button>(100, 70, 500, 400);
-    std::shared_ptr<Button> RefreshFile = std::make_shared<Button>(100, 70, 500, 500);
+    std::shared_ptr<Button> CreateButton = std::make_shared<Button>(200, 70, 50, 50, "data/Create_png.png");
+    std::shared_ptr<Button> ChooseFile = std::make_shared<Button>(250, 70, 50, 200, "data/choose_file.png");
+    std::shared_ptr<Button> Back = std::make_shared<Button>(70, 70, 300, 400, "data/Back.png");
+    std::shared_ptr<Button> ChangeFile = std::make_shared<Button>(100, 70, 500, 100, "data/redaktor.png");
+    std::shared_ptr<Button> RefreshFile = std::make_shared<Button>(100, 70, 500, 350, "data/Refresh.png");
     std::shared_ptr<std::string> FileName = std::make_shared<std::string>();
     std::string usedFileName;
     std::shared_ptr<TextBox> textBox = std::make_shared<TextBox>();

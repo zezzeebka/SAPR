@@ -9,6 +9,8 @@ TextBox::TextBox() {
     isActive = 0;
     font->loadFromFile("arialmt.ttf");
     drawableText.setFont(*font);
+    helpText.setFont(*font);
+    helpText.setPosition(0,450);
 }
 
 void TextBox::Draw(std::shared_ptr<sf::RenderWindow> window)
@@ -19,8 +21,15 @@ void TextBox::Draw(std::shared_ptr<sf::RenderWindow> window)
         drawableText.setCharacterSize(30);
         drawableText.setStyle(sf::Text::Bold);
         drawableText.setFillColor(sf::Color::Red);
+
+        helpText.setString(helpStr);
+        helpText.setCharacterSize(30);
+        helpText.setStyle(sf::Text::Bold);
+        helpText.setFillColor(sf::Color::Green);
+
         window->draw(drawableText);
-        window->draw(*Back->getRectangle());
+        window->draw(helpText);
+        window->draw(*Back);
     }
 
 }
@@ -46,7 +55,7 @@ void TextBox::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event event
         if (event.type == sf::Event::MouseButtonPressed){
                 sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
                 sf::Vector2f mousePosF ( static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ) );
-                if(Back->getRectangle()->getGlobalBounds().contains(mousePosF))
+                if(Back->getGlobalBounds().contains(mousePosF))
                 {
                     isActive = 0;
 
@@ -58,4 +67,9 @@ void TextBox::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event event
 std::string TextBox::getString()
 {
     return str;
+}
+
+void TextBox::setString(std::string inFileStr)
+{
+    str = inFileStr;
 }

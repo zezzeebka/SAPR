@@ -12,10 +12,10 @@ void Preprocessor::Draw(std::shared_ptr<sf::RenderWindow> window){
     }
     if(isActive == 1)
     {
-    window->draw(*ButtonDraw->getRectangle());
-    window->draw(*ButtonDrawWithPressure->getRectangle());
-    window->draw(*ButtonProjectFile->getRectangle());
-    window->draw(*Back->getRectangle());
+    window->draw(*ButtonDraw);
+    window->draw(*ButtonDrawWithPressure);
+    window->draw(*ButtonProjectFile);
+    window->draw(*Back);
     }
     else if(MainConstruction->isActive > 0)
     {
@@ -32,22 +32,22 @@ void Preprocessor::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event 
             if (event.type == sf::Event::MouseButtonPressed){
                     sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
                     sf::Vector2f mousePosF ( static_cast<float>( mousePos.x ), static_cast<float>( mousePos.y ) );
-                    if(ButtonDraw->getRectangle()->getGlobalBounds().contains(mousePosF)){
+                    if(ButtonDraw->getGlobalBounds().contains(mousePosF)){
                         isActive++;
                         filename = MainProjectFileManager->getFileName();
                         MainConstruction->setFilename(filename);
                         MainConstruction->isActive = 1;
                         Sleep(1000);
                     }
-                    else if(ButtonDrawWithPressure->getRectangle()->getGlobalBounds().contains(mousePosF)){
+                    else if(ButtonDrawWithPressure->getGlobalBounds().contains(mousePosF)){
 
                     }
-                    else if(ButtonProjectFile->getRectangle()->getGlobalBounds().contains(mousePosF)){
+                    else if(ButtonProjectFile->getGlobalBounds().contains(mousePosF)){
                         isActive++;
                         MainProjectFileManager->isActive = 1;
                         Sleep(1000);
                     }
-                    else if(Back->getRectangle()->getGlobalBounds().contains(mousePosF))
+                    else if(Back->getGlobalBounds().contains(mousePosF))
                     {
                         isActive = 0;
                     }
@@ -60,3 +60,8 @@ void Preprocessor::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event 
             MainProjectFileManager->getEvent(window, event);
         }
     }
+
+std::shared_ptr<Construction> Preprocessor::getConstruction()
+{
+    return MainConstruction;
+}
