@@ -27,7 +27,7 @@ void Processor::Solve()
     std::vector<std::vector<double>> matrixA = std::vector<std::vector<double>>(L.size()+1,
                                                                                 std::vector<double>(L.size()+1,0));
     std::vector<double> B = std::vector<double>(matrixA.size(), 0);
-    std::vector<double> U = std::vector<double>(B.size(), 0);
+    U = std::vector<double>(B.size(), 0);
 
     for(int i = 0; i < L.size(); i++)
     {
@@ -105,4 +105,14 @@ void Processor::Solve()
 void Processor::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event event)
 {
 
+}
+
+std::shared_ptr<Preprocessor> Processor::getPreproc()
+{
+    return MainPreproc;
+}
+
+std::vector<double> Processor::getU()
+{
+    return U;
 }

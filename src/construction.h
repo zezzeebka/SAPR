@@ -39,6 +39,8 @@ public:
     std::vector<double> getE();
     std::vector<double> getDF();
     std::vector<double> getCF();
+    std::vector<double> getDrawableL();
+    std::vector<double> getDrawableS();
     bool getLeftSeal();
     bool getRightSeal();
     double getFirstPressure();

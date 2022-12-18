@@ -351,12 +351,12 @@ std::vector<double> Construction::getA()
 
 std::vector<double> Construction::getE()
 {
-    return arrLength;
+    return E;
 }
 
 std::vector<double> Construction::getSigma()
 {
-    return arrLength;
+    return Sigma;
 }
 
 std::vector<double> Construction::getDF()
@@ -382,4 +382,13 @@ bool Construction::getRightSeal()
 double Construction::getFirstPressure()
 {
     return firstPressure;
+}
+std::vector<double> Construction::getDrawableL()
+{
+    return drawableLength;
+}
+
+std::vector<double> Construction::getDrawableS()
+{
+    return drawableSquare;
 }

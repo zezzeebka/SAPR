@@ -10,7 +10,7 @@ MainScreen::MainScreen()
 void MainScreen::Draw(std::shared_ptr<sf::RenderWindow> window)
 {
     window->draw(BG);
-    if (MainPreprocessor->isActive == 0){
+    if (MainPreprocessor->isActive == 0 && MainPostprocessor->isActive == 0){
         isActive = 1;
     }
     if(isActive == 1){
@@ -21,8 +21,9 @@ void MainScreen::Draw(std::shared_ptr<sf::RenderWindow> window)
     if(MainPreprocessor->isActive > 0){
     MainPreprocessor->Draw(window);
     }
-    if(MainProcessor->isActive > 0)
+    if(MainPostprocessor->isActive > 0)
     {
+    MainPostprocessor->Draw(window);
     }
 }
 
@@ -36,21 +37,28 @@ void MainScreen::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event ev
                         MainPreprocessor->isActive = 1;
                         Sleep(1000);
                     }
-                    if(Proc->getGlobalBounds().contains(mousePosF)){
+                    else if(Proc->getGlobalBounds().contains(mousePosF)){
                         MainProcessor->Solve();
                         Sleep(1000);
                     }
-                    if(Postproc->getGlobalBounds().contains(mousePosF)){
-
+                    else if(Postproc->getGlobalBounds().contains(mousePosF)){
+                        isActive++;
+                        MainPostprocessor->isActive = 1;
+                        Sleep(1000);
+                        MainPostprocessor->a();
                 }
             }
         }
         if(MainPreprocessor->isActive > 0){
         MainPreprocessor->getEvent(window, event);
         }
-        if(MainProcessor->isActive > 0)
+        else if(MainProcessor->isActive > 0)
         {
             MainProcessor->getEvent(window, event);
+        }
+        else if(MainPostprocessor->isActive > 0)
+        {
+            MainPostprocessor->getEvent(window, event);
         }
     }
 

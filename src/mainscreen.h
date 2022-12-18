@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "button.h"
 #include <memory>
+#include "postprocessor.h"
 #include "windowactivity.h"
 #include "preprocessor.h"
 #include "processor.h"
@@ -14,6 +15,7 @@ private:
     std::shared_ptr<Button> Postproc = std::make_shared<Button>(200, 70, 300, 400, "data/postproc.png");
     std::shared_ptr<Preprocessor> MainPreprocessor = std::make_shared<Preprocessor>();
     std::shared_ptr<Processor> MainProcessor = std::make_shared<Processor>(MainPreprocessor);
+    std::shared_ptr<Postprocessor> MainPostprocessor = std::make_shared<Postprocessor>(MainProcessor);
     sf::Texture BGTexture;
     sf::Sprite BG;
 public:
