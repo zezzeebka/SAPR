@@ -59,6 +59,40 @@ void Const_Diagram::Draw(std::shared_ptr<sf::RenderWindow> window)
 
     posX = 42;
     posY = 300;
+    // gets the value of the max element in O(n) time
+    std::vector<double> tmpUx;
+    for(int i=0;i<Ux.size();i++){
+            tmpUx.insert(tmpUx.end(),Ux[i].begin(),Ux[i].end());
+        }
+    double Uxmax = *max_element(tmpUx.begin(),tmpUx.end());
+    double Uxmin = abs(*min_element(tmpUx.begin(),tmpUx.end()));
+
+    std::vector<double> tmpNx;
+    for(int i=0;i<Nx.size();i++){
+            tmpNx.insert(tmpNx.end(),Nx[i].begin(),Nx[i].end());
+        }
+    double Nxmax = *max_element(tmpNx.begin(),tmpNx.end());
+    double Nxmin = abs(*min_element(tmpNx.begin(),tmpNx.end()));
+
+    std::vector<double> tmpSx;
+    for(int i=0;i<Sx.size();i++){
+            tmpSx.insert(tmpSx.end(),Sx[i].begin(),Sx[i].end());
+        }
+    double Sxmax = *max_element(tmpSx.begin(),tmpSx.end());
+    double Sxmin = abs(*min_element(tmpSx.begin(),tmpSx.end()));
+
+    auto comp = [](double x, double y)
+    {
+        if (x < y)
+        {
+            return y;
+        }
+        else
+        {
+            return x;
+        }
+    };
+
     for(int i = 0; i < MainConstr->getL().size(); i++)
     {
         for(int j = 0; j < 20; j++)
@@ -71,9 +105,9 @@ void Const_Diagram::Draw(std::shared_ptr<sf::RenderWindow> window)
             dotN.setFillColor(sf::Color::Red);
             dotS.setFillColor(sf::Color::Blue);
 
-            dotU.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Ux[i][j]*10);
-            dotS.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Sx[i][j]*10);
-            dotN.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Nx[i][j]*10);
+            dotU.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Ux[i][j]*200/comp(Uxmax, Uxmin));
+            dotS.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Sx[i][j]*200/comp(Sxmax, Sxmin));
+            dotN.setPosition(posX+MainConstr->getDrawableL()[i]/20*j*lenghtKoef, posY-Nx[i][j]*200/comp(Nxmax, Nxmin));
 
             window->draw(dotU);
             window->draw(dotS);

@@ -65,3 +65,8 @@ std::shared_ptr<Construction> Preprocessor::getConstruction()
 {
     return MainConstruction;
 }
+
+std::string Preprocessor::getFileName()
+{
+    return filename;
+}

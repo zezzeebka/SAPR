@@ -1,5 +1,7 @@
 #include "postprocessor.h"
 #include "construction.h"
+#include <fstream>
+#include <sstream>
 
 Postprocessor::Postprocessor()
 {
@@ -92,6 +94,7 @@ void Postprocessor::getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event
                         }
                         else if(B3->getGlobalBounds().contains(mousePosF)){
                             isActive++;
+                            getResultFile();
                             //MainProjectFileManager->isActive = 1;
                             //Sleep(1000);
                         }
@@ -157,4 +160,29 @@ void Postprocessor::a()
         auto b = getUx(0,x);
         x += 0.05;
     }
+}
+
+void Postprocessor::getResultFile()
+{
+    std::string dt = MainProcessor->getPreproc()->getFileName();
+    dt += "Result";
+    std::ofstream outFile;
+    outFile.open(dt + ".txt");
+    std::string inFile = "";
+    int k = 0;
+    for(int i = 0; i < MainProcessor->getPreproc()->getConstruction()->getL().size(); i++)
+    {
+        for(float j = 0; j < MainProcessor->getPreproc()->getConstruction()->getL()[i]; )
+        {
+
+            inFile += "Ux[" + std::to_string(i) + "][" + std::to_string(k) + "] = " + std::to_string(getUx(i,j)) +
+                    " Nx[" + std::to_string(i) + "][" + std::to_string(k) + "] = " + std::to_string(getNx(i,j)) +
+                    "Sx[" + std::to_string(i) + "][" + std::to_string(k) + "] = " + std::to_string(getSx(i,j)) + "\n";
+            j += MainProcessor->getPreproc()->getConstruction()->getL()[i]/20;
+            k++;
+        }
+        k = 0;
+    }
+    outFile << inFile;
+
 }

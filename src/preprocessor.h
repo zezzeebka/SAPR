@@ -21,7 +21,7 @@ public:
     void Draw(std::shared_ptr<sf::RenderWindow> window);
     void getEvent(std::shared_ptr<sf::RenderWindow> window, sf::Event event);
     std::shared_ptr<Construction> getConstruction();
-
+    std::string getFileName();
 };
 
 #endif // PREPROCESSOR_H

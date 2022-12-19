@@ -39,7 +39,13 @@ void Construction::Draw(std::shared_ptr<sf::RenderWindow> window)
         Square.clear();
         centralizedPressure.clear();
         decentralizedPressure.clear();
+        E.clear();
+        Sigma.clear();
         firstPressure = 0;
+        lenghtKoef = 0;
+        heightKoef = 0;
+        leftSeal = 0;
+        rightSeal = 0;
 
         std::ifstream nameFileout;
 
